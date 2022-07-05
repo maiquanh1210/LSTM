@@ -75,15 +75,15 @@ class Trainer():
         model.to(self.device)
         output = []
         sample = []
-        criterion = nn.CrossEntropyLoss().to(self.device)
+        #criterion = nn.CrossEntropyLoss().to(self.device)
         with torch.no_grad():
             for data in test_data:
-                data_ = data[:-1].to(self.device).float()
-                target = data[-1].to(self.device).float()
+                data_ = data[:,:,:-1].to(self.device).float()
+                target = data[:,:,-1].to(self.device).float()
                 x = model.init_hidden()
                 pred = model(data_.to(device).float(), x)
                 output.append(pred)
-                sample.append(test_data[:,:, -1])
+                sample.append(target)
         return output, sample
                 
                 

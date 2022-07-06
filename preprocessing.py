@@ -29,11 +29,12 @@ data_train.replace(['Normal','Attack'],[0, 1], inplace= True)
 
 scaler = MinMaxScaler()
 #train
-data_train_ = scaler.fit_transform(data_train.iloc[:, :-1])
+data_train_ = scaler.fit_transform(data_train)
+#train_label = np.array(data_train['Normal/Attack'])
 #test
-data_test_ = scaler.transform(data_test.iloc[: , :-1])
-index_anomaly = np.array(data_test.index[data_test['Normal/Attack'] == 1].tolist())
-
+data_test_ = scaler.transform(data_test)
+#index_anomaly = np.array(data_test.index[data_test['Normal/Attack'] == 1].tolist())
+#test_label = np.array(data_test['Normal/Attack'])
 #save npz flie
 
-np.savez('pre_processing.npz', training = data_train_, test = data_test_, idx_anomaly = index_anomaly)
+np.savez('pre_processing1.npz', training = data_train_, test = data_test_)
